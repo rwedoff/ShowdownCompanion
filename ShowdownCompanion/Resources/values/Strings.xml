@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">ShowdownCompanion</string>
+  <string name="app_name">Showdown Companion</string>
+  <string name="info_string">Make sure you are connected to the same network as the game. The game will tell you
+  what to put in the Computer Code box. Press connect when you are done.
+  </string>
 </resources>

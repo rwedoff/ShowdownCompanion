@@ -3,5 +3,39 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:paddingBottom="10px">
+    <TextView
+        android:text="Computer Code"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ipTitleText"
+        android:importantForAccessibility="yes"
+        android:contentDescription="Computer Code from Game text" />
+    <EditText
+        android:inputType="phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ipEditText"
+        android:contentDescription="Enter Computer Code from the game here"
+        android:layout_marginTop="100px" />
+    <Button
+        android:text="Connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/connectButton"
+        android:contentDescription="Connect to Game"
+        android:layout_marginTop="100px" />
+    <TextView
+        android:text="WiFi Info:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/internetInfo" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoString"
+        android:text="@string/info_string" />
 </LinearLayout>

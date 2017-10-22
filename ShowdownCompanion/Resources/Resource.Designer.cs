@@ -41,11 +41,45 @@ namespace ShowdownCompanion
 			}
 		}
 		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f040003
+			public const int connectButton = 2130968579;
+			
+			// aapt resource value: 0x7f040000
+			public const int connectString = 2130968576;
+			
+			// aapt resource value: 0x7f040005
+			public const int infoString = 2130968581;
+			
+			// aapt resource value: 0x7f040004
+			public const int internetInfo = 2130968580;
+			
+			// aapt resource value: 0x7f040002
+			public const int ipEditText = 2130968578;
+			
+			// aapt resource value: 0x7f040001
+			public const int ipTitleText = 2130968577;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
+			{
+			}
+		}
+		
 		public partial class Layout
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Main = 2130837504;
+			public const int InGame = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Main = 2130837505;
 			
 			static Layout()
 			{
@@ -62,6 +96,9 @@ namespace ShowdownCompanion
 			
 			// aapt resource value: 0x7f030000
 			public const int app_name = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int info_string = 2130903041;
 			
 			static String()
 			{
