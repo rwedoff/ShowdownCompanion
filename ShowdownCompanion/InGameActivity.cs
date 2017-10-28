@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace ShowdownCompanion
 {
     [Activity(Label = "InGameActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class InGameActivity : Activity
+    public class InGameActivity : Activity, View.IOnTouchListener
     {
-        // The port number for the remote device.  
+        // The port number for the remote device.
         private static int port;
         private static IPAddress ipAddress;
         private static Socket sender;
@@ -51,7 +51,9 @@ namespace ShowdownCompanion
 
             vibrator = (Vibrator)GetSystemService(VibratorService);
 
-            
+            View v = FindViewById(Resource.Id.InGameScreen);
+            v.SetOnTouchListener(this);
+
         }
 
         protected override void OnStart()
@@ -95,7 +97,6 @@ namespace ShowdownCompanion
                 // Connect the socket to the remote endpoint. Catch any errors.
                 try
                 {
-
                     sender.Connect(remoteEP);
 
                     using (var h = new Handler(Looper.MainLooper))
@@ -153,24 +154,41 @@ namespace ShowdownCompanion
 
         private void ProcessMessage(string message)
         {
-            Console.WriteLine(message);
             if (message.Equals("wall;"))
             {
-                vibrator.Vibrate(new Int64[] { 0, 300,200,100,200,300,200 }, -1);
-            }
-            if (message.Equals("ball;"))
-            {
                 vibrator.Vibrate(100);
+            }
+            else if (message.Equals("ball;"))
+            {
+                vibrator.Vibrate(300);
             }
         }
 
         private void SendMessage(string message)
         {
-            // Encode the data string into a byte array.
-            byte[] msg = Encoding.ASCII.GetBytes(message);
+            if (sender.Connected)
+            {
+                // Encode the data string into a byte array.
+                byte[] msg = Encoding.ASCII.GetBytes(message);
 
-            // Send the data through the socket.
-            int bytesSent = sender.Send(msg);
+                // Send the data through the socket.
+                int bytesSent = sender.Send(msg);
+            }
+        }
+
+        public bool OnTouch(View v, MotionEvent e)
+        {
+            if(e.Action == MotionEventActions.Down)
+            {
+                Console.WriteLine("DOWN");
+                SendMessage("up;");
+            }
+            if(e.Action == MotionEventActions.Up)
+            {
+                Console.WriteLine("UP");
+                SendMessage("down;");
+            }
+            return true;
         }
     }
 }
