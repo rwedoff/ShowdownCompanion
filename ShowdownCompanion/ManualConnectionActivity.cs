@@ -10,7 +10,7 @@ using Android.Preferences;
 
 namespace ShowdownCompanion
 {
-    [Activity(Label = "ManualConnectionActivity")]
+    [Activity(Label = "Manual Connection")]
     public class ManualConnectionActivity : Activity
     {
         private ISharedPreferences preferences;

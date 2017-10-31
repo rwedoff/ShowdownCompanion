@@ -78,11 +78,14 @@ namespace ShowdownCompanion
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040008
-			public const int InGameScreen = 2130968584;
+			// aapt resource value: 0x7f040007
+			public const int InGameScreen = 2130968583;
 			
 			// aapt resource value: 0x7f040003
 			public const int SearchButton = 2130968579;
+			
+			// aapt resource value: 0x7f040009
+			public const int clickerView = 2130968585;
 			
 			// aapt resource value: 0x7f040001
 			public const int computerButton = 2130968577;
@@ -90,8 +93,8 @@ namespace ShowdownCompanion
 			// aapt resource value: 0x7f04000a
 			public const int connectButton = 2130968586;
 			
-			// aapt resource value: 0x7f040009
-			public const int connectString = 2130968585;
+			// aapt resource value: 0x7f040008
+			public const int connectString = 2130968584;
 			
 			// aapt resource value: 0x7f04000c
 			public const int infoString = 2130968588;
@@ -108,14 +111,11 @@ namespace ShowdownCompanion
 			// aapt resource value: 0x7f040000
 			public const int item_touch_helper_previous_elevation = 2130968576;
 			
-			// aapt resource value: 0x7f040007
-			public const int manualConnectButton = 2130968583;
+			// aapt resource value: 0x7f040006
+			public const int manualConnectButton = 2130968582;
 			
 			// aapt resource value: 0x7f040005
-			public const int relativeLayout1 = 2130968581;
-			
-			// aapt resource value: 0x7f040006
-			public const int serverRecyclerView = 2130968582;
+			public const int serverRecyclerView = 2130968581;
 			
 			// aapt resource value: 0x7f040004
 			public const int statusText = 2130968580;

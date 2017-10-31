@@ -11,7 +11,7 @@ using System.Net;
 
 namespace ShowdownCompanion
 {
-    [Activity(Label = "ShowdownCompanion", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Showdown Companion", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

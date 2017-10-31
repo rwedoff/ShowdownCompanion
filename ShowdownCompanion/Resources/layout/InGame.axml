@@ -10,5 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/connectString"
-        android:contentDescription="Trying to Connect" />
+        android:contentDescription="Trying to Connect"
+        android:accessibilityLiveRegion="polite"
+        android:background="@android:color/black" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/clickerView"
+        android:background="@android:color/black"
+        android:importantForAccessibility="no" />
 </LinearLayout>

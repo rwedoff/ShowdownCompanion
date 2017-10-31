@@ -9,17 +9,19 @@ using Android.Widget;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading.Tasks;
+using Android.Views.Accessibility;
 
 namespace ShowdownCompanion
 {
-    [Activity(Label = "InGameActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class InGameActivity : Activity, View.IOnTouchListener
+    [Activity(Label = "Game Play", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    public class InGameActivity : Activity, View.IOnTouchListener, View.IOnHoverListener
     {
         // The port number for the remote device.
         private static int port;
         private static IPAddress ipAddress;
         private static Socket sender;
         private static Vibrator vibrator;
+        private AccessibilityManager accessibilityManager;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,6 +29,7 @@ namespace ShowdownCompanion
 
             // Create your application here
             SetContentView(Resource.Layout.InGame);
+            accessibilityManager = (AccessibilityManager)GetSystemService(AccessibilityService);
 
             View decorView = Window.DecorView;
             var uiOptions = (int)decorView.SystemUiVisibility;
@@ -51,8 +54,10 @@ namespace ShowdownCompanion
 
             vibrator = (Vibrator)GetSystemService(VibratorService);
 
-            View v = FindViewById(Resource.Id.InGameScreen);
+            View v = FindViewById(Resource.Id.clickerView);
             v.SetOnTouchListener(this);
+            v.SetOnHoverListener(this);
+            v.ImportantForAccessibility = ImportantForAccessibility.No;
 
         }
 
@@ -80,6 +85,9 @@ namespace ShowdownCompanion
             }
         }
 
+        /// <summary>
+        /// Starts the TCP Client on a new thread. Loops receiving message code.
+        /// </summary>
         public void StartClient()
         {
             // Data buffer for incoming data.
@@ -152,6 +160,10 @@ namespace ShowdownCompanion
             }
         }
 
+        /// <summary>
+        /// Processes a received message
+        /// </summary>
+        /// <param name="message"></param>
         private void ProcessMessage(string message)
         {
             if (message.Equals("wall;"))
@@ -164,6 +176,10 @@ namespace ShowdownCompanion
             }
         }
 
+        /// <summary>
+        /// Sends string messages to connected Server
+        /// </summary>
+        /// <param name="message"></param>
         private void SendMessage(string message)
         {
             if (sender.Connected)
@@ -176,6 +192,12 @@ namespace ShowdownCompanion
             }
         }
 
+        /// <summary>
+        /// Send a up and down message to the game with Socket Server
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public bool OnTouch(View v, MotionEvent e)
         {
             if(e.Action == MotionEventActions.Down)
@@ -188,6 +210,34 @@ namespace ShowdownCompanion
                 Console.WriteLine("UP");
                 SendMessage("down;");
             }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Event is trigger onHover and checks if Talkback is running. If Talkback is on, then convert HoverEnter
+        /// and HoverExit to TouchUp and TouchDown. This remove the restraint on double touch to click during Talkback.
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public bool OnHover(View v, MotionEvent e)
+        {
+            if(accessibilityManager.IsTouchExplorationEnabled && e.PointerCount == 1)
+            {
+                var action = e.Action;
+                switch (action)
+                {
+                    case MotionEventActions.HoverEnter:
+                        e.Action = MotionEventActions.Down;
+                        break;
+                    case MotionEventActions.HoverExit:
+                        e.Action = MotionEventActions.Up;
+                        break;
+                }
+                return OnTouch(v,e);
+        }
+
             return true;
         }
     }

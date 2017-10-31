@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using System.Net.Sockets;
 using System.Net;
@@ -17,7 +14,7 @@ using Android.Support.V7.Widget;
 
 namespace ShowdownCompanion
 {
-    [Activity(Label = "ConnectToGameActivity")]
+    [Activity(Label = "Connect")]
     public class ConnectToGameActivity : Activity
     {
         private const int listenPort = 11000;
@@ -27,7 +24,6 @@ namespace ShowdownCompanion
         private static List<ComputerInfo> serverList = new List<ComputerInfo>();
         private readonly object lockList = new object();
         private bool messageReceived;
-        private ISharedPreferences preferences;
         private string ipString;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -164,6 +160,7 @@ namespace ShowdownCompanion
             {
                 Console.WriteLine("Scanning...");
                 statusText.Text = "Status: Scanning...";
+                Toast.MakeText(this, "Status: Scanning...", ToastLength.Long).Show();
             });
             while(stopwatch.ElapsedMilliseconds < 7000)
             {

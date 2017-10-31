@@ -9,23 +9,29 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
+        android:id="@+id/textView1"
+        android:layout_marginBottom="100px" />
     <Button
         android:text="Connect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/connectButton"
-        android:contentDescription="Connect to Game" />
+        android:contentDescription="Connect to Game"
+        android:layout_marginBottom="100px" />
     <TextView
         android:text="WiFi Info:"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/internetInfo" />
+        android:id="@+id/internetInfo"
+        android:layout_gravity="bottom"
+        android:layout_weight="0" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/infoString"
-        android:text="@string/info_string" />
+        android:text="@string/info_string"
+        android:layout_gravity="bottom"
+        android:layout_weight="1" />
 </LinearLayout>
