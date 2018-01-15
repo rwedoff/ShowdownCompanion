@@ -106,7 +106,6 @@ namespace ShowdownCompanion
                 try
                 {
                     sender.Connect(remoteEP);
-
                     using (var h = new Handler(Looper.MainLooper))
                     {
                         h.Post(() => {
@@ -146,7 +145,17 @@ namespace ShowdownCompanion
                 }
                 catch (SocketException se)
                 {
+                    using (var h = new Handler(Looper.MainLooper))
+                    {
+                        h.Post(() => {
+                            Toast.MakeText(Application.Context, "Trying to Connect", ToastLength.Long).Show();
+                            TextView text = FindViewById<TextView>(Resource.Id.connectString);
+                            text.Text = "Trying to Connect...";
+                            text.ContentDescription = "Trying to Connect";
+                        });
+                    }
                     Console.WriteLine("SocketException : {0}", se.ToString());
+                    StartClient();
                 }
                 catch (Exception e)
                 {
